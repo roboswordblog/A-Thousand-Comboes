@@ -37,6 +37,7 @@ class Player:
     self.camerax = 0
     self.cameray = 0
     self.sword = Sword(x, y, cooldownBar, self)
+    self.dir = 0
 
   def update(self):
     mousex, mousey = pygame.mouse.get_pos()
@@ -45,4 +46,9 @@ class Player:
       
     elif mousex < settings.midx:
       self.dir = 1
-        
+    self.sword.update()
+  
+  def draw(self):
+    pygame.transform.flip(self.img, self.dir, False)
+    window.blit(self.img, (self.x, self.y))
+    self.sword.draw()
