@@ -40,19 +40,45 @@ class Player:
         self.window = window
         self.sword = Sword(x, y, cooldownBar, self.window)
         self.dir = 0
+        self.speed = 10
         self.animation = "idle"
         self.animationFrame = 0
-
+        self.image = pygame.transform.scale(pygame.image.load(f"assets/player{self.animation}/{animationFrame}"), (64, 48))
+        self.mode = "idle"
+      
     def update(self):
-        mousex, mousey = pygame.mouse.get_pos()
-        if mousex > settings.midx:
-            self.dir = 0
+      self.animationFrame += 1  
+      if self.animationFrame  > 1:
+          self.animationnFrame = 0
+        
+      mousex, mousey = pygame.mouse.get_pos()
+      if mousex > settings.midx:
+          self.dir = 0
 
-        elif mousex < settings.midx:
-            self.dir = 1
-        self.sword.update()
+      elif mousex < settings.midx:
+          self.dir = 1
+      self.sword.update()
 
+      keys = pygame.key.get_pressed()
+      if keys[pygame.K_W]:
+        self.y += self.speed
+        self.mode = "walk"
+        
+      if keys[pygame.K_S]:
+        self.y -= self.speed
+        self.mode = "walk"
+      
+      if keys[pygame.K_A]:
+        self.mode = "walk"
+        self.x -= self.speed
+
+      if keys[pygame.K_D]:
+        self.mode = "walk"
+        self.x += self.speed
+        
+    
     def draw(self):
-        pygame.transform.flip(self.img, self.dir, False)
+        self.image = pygame.transform.scale(pygame.image.load(f"assets/player{self.animation}/{animationFrame}"), (64, 48))
+        self.image = pygame.transform.flip(self.img, self.dir, False)
         self.window.blit(self.img, (self.x, self.y))
         self.sword.draw()
