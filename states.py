@@ -1,9 +1,13 @@
-import pygame
+from player import *
+import uilib
+from settings import *
+
 
 class Game:
-  def __init__(self):
-    pass
-
+  def __init__(self, window):
+    self.player = Player(midx,midy,None,window)
+    self.window = window
+    
   def draw(self):
     pass
 
@@ -25,7 +29,7 @@ class Home:
       
 
 class States:
-  def __init__(self):
+  def __init__(self, window):
     self.game = Game(window)
     self.home = Home(window)
     self.state = self.home
