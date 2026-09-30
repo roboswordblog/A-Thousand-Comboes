@@ -49,7 +49,7 @@ class Player:
     def update(self):
       self.animationFrame += 1  
       if self.animationFrame  > 1:
-          self.animationnFrame = 0
+          self.animationFrame = 0
         
       mousex, mousey = pygame.mouse.get_pos()
       if mousex > settings.midx:
