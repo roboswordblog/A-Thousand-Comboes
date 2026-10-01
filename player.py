@@ -10,7 +10,7 @@ class Sword:
         self.dir = 0
         self.player = player
         self.actDir = 1
-        self.img = pygame.image.load("assets/sword.png")
+        self.image = pygame.image.load("assets/sword.png")
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
@@ -38,18 +38,18 @@ class Player:
         self.camerax = 0
         self.cameray = 0
         self.window = window
-        self.sword = Sword(x, y, cooldownBar, self.window)
+        self.sword = Sword(cooldownBar, self,self.window)
         self.dir = 0
         self.speed = 10
         self.animation = "idle"
         self.animationFrame = 0
-        self.image = pygame.transform.scale(pygame.image.load(f"assets/player{self.animation}/{animationFrame}"), (64, 48))
+        self.image = pygame.transform.scale(pygame.image.load(f"assets/player{self.animation}/{self.animationFrame}"), (64, 48))
         self.mode = "idle"
       
     def update(self):
       self.animationFrame += 1  
       if self.animationFrame  > 1:
-          self.animationFrame = 0
+          self.animationnFrame = 0
         
       mousex, mousey = pygame.mouse.get_pos()
       if mousex > settings.midx:
@@ -78,7 +78,7 @@ class Player:
         
     
     def draw(self):
-        self.image = pygame.transform.scale(pygame.image.load(f"assets/player{self.animation}/{animationFrame}"), (64, 48))
+        self.image = pygame.transform.scale(pygame.image.load(f"assets/player{self.animation}/{self.animationFrame}"), (64, 48))
         self.image = pygame.transform.flip(self.img, self.dir, False)
         self.window.blit(self.img, (self.x, self.y))
         self.sword.draw()
