@@ -1,18 +1,20 @@
 from player import *
+from uiComboBar import *
 import uilib
 from settings import *
 
 
 class Game:
   def __init__(self, window):
-    self.player = Player(midx,midy,None,window)
+    self.comboBar = ComboBar(window)
+    self.player = Player(settings.MIDX,settings.MIDY,self.comboBar,window)
     self.window = window
     
   def draw(self):
-    pass
+    self.player.draw()
 
   def update(self):
-    pass
+    self.player.update()
 
 class Home:
   def __init__(self, window):
@@ -39,4 +41,3 @@ class States:
 
   def update(self):
     self.state.update()
-  
